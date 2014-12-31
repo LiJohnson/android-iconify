@@ -20,9 +20,6 @@
  */
 package com.joanzapata.android.iconify;
 
-import static com.joanzapata.android.iconify.Utils.convertDpToPx;
-import static com.joanzapata.android.iconify.Utils.isEnabled;
-import static java.lang.String.valueOf;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,6 +28,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
+
+import static com.joanzapata.android.iconify.Utils.convertDpToPx;
+import static com.joanzapata.android.iconify.Utils.isEnabled;
+import static java.lang.String.valueOf;
 
 /**
  * Embed an icon into a Drawable that can be used as TextView icons, or ActionBar icons.
@@ -67,7 +68,7 @@ public class IconDrawable extends Drawable {
         this.context = context;
         this.icon = icon;
         paint = new TextPaint();
-        paint.setTypeface(Iconify.getTypeface(context));
+        paint.setTypeface(Iconify.getTypeface(context,icon));
         paint.setStyle(Paint.Style.STROKE);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setUnderlineText(false);

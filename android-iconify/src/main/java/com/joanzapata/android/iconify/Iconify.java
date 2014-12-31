@@ -48,7 +48,6 @@ public final class Iconify {
 		TTF_FILES.put("fa", "fontawesome-webfont-4.2.0.ttf");
 		TTF_FILES.put("gy", "glyphicons-halflings-regular.ttf");
 		TTF_FILES.put("gmd", "google_material_design.ttf");
-
 	}
 
 	private Iconify() {
@@ -60,9 +59,14 @@ public final class Iconify {
 	 */
 	public static final void addIcons(TextView... textViews) {
 		for (TextView textView : textViews) {
-			textView.setTypeface(getTypeface(textView));
+			setTypeface(textView, textView.getText().toString());
 			textView.setText(compute(textView.getText()));
 		}
+	}
+
+	public static final void setIcon(TextView textView, IconValue value) {
+		textView.setTypeface(getTypeface(textView.getContext(), value));
+		textView.setText(valueOf(value.character));
 	}
 
 	public static CharSequence compute(CharSequence charSequence) {
@@ -74,9 +78,16 @@ public final class Iconify {
 		return replaceIcons(new StringBuilder(text), TTF_FILES.keySet().iterator());
 	}
 
-	public static final void setIcon(TextView textView, IconValue value) {
-		textView.setTypeface(getTypeface(textView));
-		textView.setText(valueOf(value.character));
+	public static final void setTypeface(TextView textView,String text) {
+		Iterator<String> iterator = TTF_FILES.keySet().iterator();
+		String type;
+		while (iterator.hasNext()) {
+			type = iterator.next();
+			if (text.indexOf("{" + type) != -1) {
+				textView.setTypeface(getTypeface(textView.getContext(), type));
+				return;
+			}
+		}
 	}
 
 	/**
@@ -84,21 +95,8 @@ public final class Iconify {
 	 *
 	 * @return the typeface, or null if something goes wrong.
 	 */
-	public static final Typeface getTypeface(Context context) {
-		return getTypeface(context, "fa");
-	}
-
-	public static final Typeface getTypeface(TextView textView) {
-		Iterator<String> iterator = TTF_FILES.keySet().iterator();
-		String text = textView.getText().toString();
-		String type;
-		while (iterator.hasNext()) {
-			type = iterator.next();
-			if (text.indexOf("{" + type) != -1) {
-				return getTypeface(textView.getContext(), type);
-			}
-		}
-		return null;
+	public static final Typeface getTypeface(Context context,IconValue iconValue) {
+		return getTypeface(context, iconValue.name().split("_")[0]);
 	}
 
 	private static final Typeface getTypeface(Context context, String type) {
@@ -107,9 +105,7 @@ public final class Iconify {
 			try {
 				typeface = Typeface.createFromFile(resourceToFile(context, TTF_FILES.get(type)));
 				TYPEFACES.put(type, typeface);
-			} catch (IOException e) {
-				return null;
-			}
+			} catch (IOException e) {}
 		}
 		return typeface;
 	}
