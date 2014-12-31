@@ -30,8 +30,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 
-import static android.util.TypedValue.*;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.applyDimension;
 import static com.joanzapata.android.iconify.Iconify.IconValue;
 
 class Utils {
@@ -95,8 +97,8 @@ class Utils {
         }
     }
 
-    public static StringBuilder replaceIcons(StringBuilder text) {
-        int startIndex = text.indexOf("{fa");
+	public static StringBuilder replaceIcons(StringBuilder text,String type) {
+        int startIndex = text.indexOf("{"+type);
         if (startIndex == -1) {
             return text;
         }
@@ -111,11 +113,17 @@ class Utils {
             String iconValue = String.valueOf(value.character);
 
             text = text.replace(startIndex, endIndex, iconValue);
-            return replaceIcons(text);
+            return replaceIcons(text,type);
 
         } catch (IllegalArgumentException e) {
             Log.w(Iconify.TAG, "Wrong icon name: " + iconString);
             return text;
         }
     }
+	public static StringBuilder replaceIcons(StringBuilder text , Iterator<String> types) {
+		while (types.hasNext()) {
+			text = replaceIcons(text, types.next());
+		}
+		return text;
+	}
 }

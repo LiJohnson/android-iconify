@@ -63,7 +63,7 @@ public class UtilsTest {
     }
 
     private void test(String in, String out) {
-        assertEquals(out, Utils.replaceIcons(new StringBuilder(in)).toString());
+        assertEquals(out, Utils.replaceIcons(new StringBuilder(in),"fa").toString());
     }
 
 }
