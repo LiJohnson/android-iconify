@@ -88,7 +88,7 @@ public final class Iconify {
 		return getTypeface(context, "fa");
 	}
 
-	private static final Typeface getTypeface(TextView textView) {
+	public static final Typeface getTypeface(TextView textView) {
 		Iterator<String> iterator = TTF_FILES.keySet().iterator();
 		String text = textView.getText().toString();
 		String type;
@@ -98,7 +98,7 @@ public final class Iconify {
 				return getTypeface(textView.getContext(), type);
 			}
 		}
-		return getTypeface(textView.getContext());
+		return null;
 	}
 
 	private static final Typeface getTypeface(Context context, String type) {

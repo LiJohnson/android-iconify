@@ -21,7 +21,9 @@
 package android.widget;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
+
 import com.joanzapata.android.iconify.Iconify;
 
 public class IconTextView extends TextView {
@@ -50,7 +52,11 @@ public class IconTextView extends TextView {
 
     @Override
     public void setText(CharSequence text, BufferType type) {
-        super.setText(Iconify.compute(text), type);
+	    Typeface f = Iconify.getTypeface(this);
+	    if( f != null ) {
+		    this.setTypeface(f);
+	    }
+	    super.setText(Iconify.compute(text), type);
     }
 
 }
