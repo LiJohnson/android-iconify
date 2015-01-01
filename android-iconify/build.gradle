@@ -18,6 +18,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+	sourceSets {
+		main.java.srcDir 'src/main/java'
+		test.java.srcDir 'src/test/java'
+	}
 }
 
 dependencies {
@@ -25,7 +30,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.0.0'
 }
 
-sourceSets {
-	main.java.srcDir 'src/main/java'
-	test.java.srcDir 'src/test/java'
-}
+
