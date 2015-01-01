@@ -10,3 +10,4 @@ gen/
 out
 gen-external-apklibs/
 classes/
+build
