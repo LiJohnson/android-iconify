@@ -20,66 +20,17 @@
  */
 package com.joanzapata.android;
 
-import android.graphics.drawable.Drawable;
-import android.widget.GridView;
-import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.ItemClick;
-import com.googlecode.androidannotations.annotations.OptionsItem;
-import com.googlecode.androidannotations.annotations.OptionsMenu;
-import com.googlecode.androidannotations.annotations.ViewById;
-import com.joanzapata.android.iconify.IconDrawable;
-import com.joanzapata.android.iconify.Iconify;
-import com.joanzapata.android.icons.sample.R;
+import android.app.Activity;
+import android.os.Bundle;
 
-import static com.joanzapata.android.iconify.Iconify.IconValue;
-import static com.joanzapata.android.utils.IconUtils.sort;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
 
-@EActivity(R.layout.activity_iconlist)
-@OptionsMenu(R.menu.menu_iconlist)
-public class IconListActivity extends SherlockFragmentActivity {
+public class IconListActivity extends Activity {
 
-    @ViewById
-    protected GridView gridView;
+	public void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
 
-    @AfterViews
-    void afterViews() {
-        getSupportActionBar().setIcon(R.drawable.actionbar_logo);
-        gridView.setAdapter(new QuickAdapter<IconValue>(this, R.layout.item, sort(asList(IconValue.values()))) {
-            @Override
-            protected void convert(BaseAdapterHelper helper, IconValue iconValue) {
-                String iconName = iconValue.toString().replaceAll("_", "-");
-                helper.setText(R.id.iconText, format("{%s}  %s", iconName, iconName));
-                Iconify.addIcons((TextView) helper.getView(R.id.iconText));
-            }
-        });
-    }
+		setContentView(R.layout.activity_icon_list);
+		findViewById(R.id.about);
 
-    @OptionsItem(R.id.about)
-    void onAboutClicked() {
-        AboutActivity_.intent(this).start();
-    }
-
-    @ItemClick
-    void gridView(IconValue iconValue) {
-        IconDialogFragment_.builder()
-                .iconValue(iconValue)
-                .build()
-                .show(getSupportFragmentManager(),
-                        IconDialogFragment.class.getSimpleName());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        Drawable aboutDrawable = new IconDrawable(this, IconValue.fa_question)
-                .colorRes(R.color.ab_item)
-                .actionBarSize();
-        menu.findItem(R.id.about).setIcon(aboutDrawable);
-        return super.onCreateOptionsMenu(menu);
-    }
+	}
 }
