@@ -37,8 +37,6 @@ import static com.joanzapata.android.iconify.Utils.resourceToFile;
 import static java.lang.String.valueOf;
 
 public final class Iconify {
-
-
 	public static final String TAG = Iconify.class.getSimpleName();
 
 	private static final Map<String, String> TTF_FILES = new HashMap<String, String>();

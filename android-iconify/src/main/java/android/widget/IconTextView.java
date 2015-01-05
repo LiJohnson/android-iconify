@@ -51,7 +51,9 @@ public class IconTextView extends TextView {
 
     @Override
     public void setText(CharSequence text, BufferType type) {
-	    Iconify.setTypeface(this,text.toString());
+	    if( !isInEditMode() ){
+		    Iconify.setTypeface(this,text.toString());
+	    }
 	    super.setText(Iconify.compute(text), type);
     }
 
