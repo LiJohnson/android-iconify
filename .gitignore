@@ -11,3 +11,4 @@ out
 gen-external-apklibs/
 classes/
 build
+.gradle

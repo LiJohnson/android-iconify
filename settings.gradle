@@ -1,1 +1,3 @@
-include 'android-iconify'
+rootProject.name = 'android-iconify'
+include ':android-iconify'
+//include ':android-iconify-sample2'

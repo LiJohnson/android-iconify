@@ -1,0 +1,12 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+  compile project(':android-iconify')
+    compile group: 'com.joanzapata.android', name: 'base-adapter-helper', version:'1.1.0'
+    compile group: 'com.googlecode.androidannotations', name: 'androidannotations-api', version:'2.7'
+    compile group: 'com.google.android', name: 'support-v4', version:'r7'
+    compile group: 'com.viewpagerindicator', name: 'library', version:'2.4.1'
+    compile group: 'com.nineoldandroids', name: 'library', version:'2.4.0'
+    compile group: 'com.actionbarsherlock', name: 'actionbarsherlock', version:'4.2.0'
+    compile(group: 'com.googlecode.androidannotations', name: 'androidannotations', version:'2.7')
+}
