@@ -33,8 +33,7 @@ public class IconTextView extends TextView {
     }
 
     public IconTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+	    this(context, attrs, 0);
     }
 
     public IconTextView(Context context, AttributeSet attrs, int defStyle) {

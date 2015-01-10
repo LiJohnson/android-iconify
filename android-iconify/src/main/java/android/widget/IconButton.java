@@ -23,37 +23,17 @@ package android.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.joanzapata.android.iconify.Iconify;
+public class IconButton extends IconTextView {
 
-public class IconButton extends Button {
+	public IconButton(Context context) {
+		super(context);
+	}
 
-    public IconButton(Context context) {
-        super(context);
-        init();
-    }
+	public IconButton(Context context, AttributeSet attrs) {
+		this(context, attrs, android.R.attr.buttonStyle);
+	}
 
-    public IconButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-    public IconButton(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init();
-    }
-
-    private void init() {
-        if (!isInEditMode())
-          Iconify.addIcons(this);
-        else
-          this.setText(this.getText());
-    }
-
-    @Override
-    public void setText(CharSequence text, BufferType type) {
-	    if( !isInEditMode() ){
-		    Iconify.setTypeface(this,text.toString());
-	    }
-	    super.setText(Iconify.compute(text), type);
-    }
+	public IconButton(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
 }
